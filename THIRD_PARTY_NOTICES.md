@@ -1,7 +1,7 @@
 # Third-party notices
 
-The project's own licence has **not been chosen yet**; the owner decides before publishing.
-Note: SignPath's free code signing needs an OSI-approved licence.
+Atlas BG Remover's own code is released under the **MIT License** (see `LICENSE`).
+The components and model weights below keep their own licences.
 
 ## AI models (ONNX)
 The ONNX conversions are downloaded from the rembg release page:

@@ -59,7 +59,7 @@ def main():
     app = ROOT / "build_out" / NAME
     (app / "models").mkdir(exist_ok=True)
     shutil.copy2(model, app / "models" / model.name)
-    for f in ("README.md", "MANUAL.md", "THIRD_PARTY_NOTICES.md"):
+    for f in ("README.md", "MANUAL.md", "THIRD_PARTY_NOTICES.md", "LICENSE"):
         if (ROOT / f).exists():
             shutil.copy2(ROOT / f, app / f)
     dist = ROOT / "dist"; dist.mkdir(exist_ok=True)

@@ -88,7 +88,7 @@ python -m pytest -q tests        # needs models/u2netp.onnx (+ isnet for one rea
 `tests/gui_smoke.py` drives the GUI under Xvfb and takes screenshots.
 
 ### Licence
-**Not chosen yet.** The owner will choose before publishing. Third-party licences are in `THIRD_PARTY_NOTICES.md`.
+The app's own code is **MIT** (see `LICENSE`). Third-party libraries and model weights keep their own licences, listed in `THIRD_PARTY_NOTICES.md`. Note the open question about the IS-Net weights (the default model) before commercial use.
 
 ---
 
@@ -125,4 +125,4 @@ python -m pytest -q tests        # needs models/u2netp.onnx (+ isnet for one rea
 - لو الجهاز مفيهوش نت: انسخ ملفات `.onnx` في فولدر `models` جنب ملف البرنامج.
 
 ### الترخيص
-لسه ما اتحددش، وصاحب المشروع هيختاره قبل النشر. تراخيص المكتبات والنماذج موجودة في `THIRD_PARTY_NOTICES.md`.
+كود البرنامج بترخيص **MIT** (شوف `LICENSE`). المكتبات والنماذج ليها تراخيصها الخاصة في `THIRD_PARTY_NOTICES.md`، وفيه ملاحظة مهمة عن أوزان نموذج IS-Net (الافتراضي) قبل أي استخدام تجاري.
