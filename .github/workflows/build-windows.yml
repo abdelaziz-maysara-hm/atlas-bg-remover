@@ -43,6 +43,11 @@ jobs:
           $p = Start-Process -FilePath $exe -ArgumentList "--selftest", "$PWD\selftest.json" -Wait -PassThru
           Get-Content selftest.json
           if ($p.ExitCode -ne 0) { throw "selftest failed ($($p.ExitCode))" }
+          # GUI start check: the window must still be alive after 20 s
+          $g = Start-Process -FilePath $exe -PassThru
+          Start-Sleep -Seconds 20
+          if ($g.HasExited) { throw "GUI exited early with code $($g.ExitCode)" }
+          Stop-Process -Id $g.Id
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
