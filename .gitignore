@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+models/
+build/
+build_out/
+build_cache/
+dist/
+*.onnx
+*.part
+no-bg/

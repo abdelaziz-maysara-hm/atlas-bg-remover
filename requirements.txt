@@ -1,0 +1,10 @@
+# runtime
+onnxruntime>=1.18
+numpy>=1.26
+pillow>=10.3
+customtkinter>=5.2
+tkinterdnd2>=0.4          # drag & drop (optional at runtime; app falls back to buttons)
+# Arabic shaping for Linux/X11 only (Windows/macOS Tk shape Arabic natively).
+# python-bidi is LGPL-3.0: it is NOT bundled into the Windows build.
+arabic-reshaper>=3.0; sys_platform == "linux"
+python-bidi>=0.4; sys_platform == "linux"

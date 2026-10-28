@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest
+pyinstaller>=6.6
+# optional "Alpha matting" edge mode (slow; adds ~150 MB to a build)
+pymatting
+scipy

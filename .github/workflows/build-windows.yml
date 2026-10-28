@@ -1,0 +1,58 @@
+name: Build Windows app
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt pytest pyinstaller
+
+      - name: Fetch bundled model (u2netp, 4.6 MB)
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path models | Out-Null
+          curl.exe -L --fail -o models/u2netp.onnx https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx
+
+      - name: Unit tests (Windows)
+        run: python -m pytest -q tests
+
+      - name: Build
+        run: python scripts/build.py
+
+      - name: Self-test the frozen exe
+        shell: pwsh
+        run: |
+          $exe = "build_out/Atlas_BG_Remover/Atlas_BG_Remover.exe"
+          $p = Start-Process -FilePath $exe -ArgumentList "--selftest", "$PWD\selftest.json" -Wait -PassThru
+          Get-Content selftest.json
+          if ($p.ExitCode -ne 0) { throw "selftest failed ($($p.ExitCode))" }
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: atlas-bg-remover-windows
+          path: dist/*.zip
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true
